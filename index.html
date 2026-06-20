@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- Amp Academy — Campus (the hub) · MVP v0.1 · 2026-06-19 · implements AA_IDENTITY_AND_CONTAINER_ARCHITECTURE_v1 -->
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amp Academy — Campus</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0D1B2A">
+<link rel="apple-touch-icon" href="icons/icon.svg">
+<style>
+:root{--navy:#0D1B2A;--navy2:#11263b;--amber:#F4A300;--ink:#e8eef5;--muted:#9db4cc;--line:#1b3a57;--paper:#0a141f}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink)}
+.wrap{max-width:1000px;margin:0 auto;padding:22px 20px 90px}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.logo{width:44px;height:44px;border-radius:11px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px}
+.top h1{font-size:20px;margin:0;font-weight:800}
+.top .sub{font-size:12px;color:var(--muted);font-family:ui-monospace,monospace}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:14px 0 8px}
+.plan{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.plan select{background:var(--navy2);color:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;font-family:inherit}
+.count{font-size:13px;color:var(--muted)}
+.count b{color:var(--amber);font-size:15px}
+.note{background:#11263b;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:10px 14px;font-size:12.5px;line-height:1.5;color:#cfe0f0;margin:10px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--navy2);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card .stripe{height:6px}
+.card .body{padding:14px 15px;flex:1;display:flex;flex-direction:column;gap:8px}
+.card .track{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:ui-monospace,monospace}
+.card h3{font-size:15px;margin:0;line-height:1.25}
+.card .meta{font-size:12px;color:var(--muted)}
+.card .foot{padding:0 15px 15px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pill{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+.pill.live{background:#0f3a2c;color:#5dcaa5}
+.pill.coming{background:#3a3410;color:#f0c14b}
+.pill.scaffold{background:#2a2440;color:#bcaef0}
+.pill.locked{background:#3a1f1f;color:#f09595}
+.pill.bonus{background:#3a2f10;color:#F4A300}
+.btn{background:var(--amber);color:var(--navy);border:0;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-family:inherit;font-size:13px;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted);cursor:default}
+.btn.lock{background:transparent;border:1px solid #5a2d2d;color:#f09595;cursor:pointer}
+.foot small{color:var(--muted);font-size:11px}
+.section-h{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:22px 0 6px;font-family:ui-monospace,monospace}
+.foota{margin-top:26px;font-size:11px;color:#637a91;line-height:1.6}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="logo">&#9889;</div>
+    <div><h1>Amp Academy</h1><div class="sub">Campus · your courses, one home</div></div>
+  </div>
+
+  <div class="bar">
+    <div class="plan"><label for="plan">Enrollment</label>
+      <select id="plan" onchange="render()"></select></div>
+    <div class="count" id="count">—</div>
+  </div>
+
+  <div class="note" id="note"></div>
+
+  <div id="shelf"></div>
+
+  <div class="foota">
+    Campus MVP v0.1 — enrollment is a <strong>local demo manifest</strong> (the IBEW-roster / Perry-subscription
+    entitlement backend is gated, counsel-pending). Launch links open each course's own installable app.
+    Track colors are a <strong>seed for Hanz &amp; Franz</strong> (the icon color-token system), not final.
+    Per AA_IDENTITY_AND_CONTAINER_ARCHITECTURE_v1.
+  </div>
+</div>
+
+<script>
+/* ---- CURRICULUM MANIFEST (owner-editable; confirm each launch URL) ---- *
+ * status: live | coming | scaffold   ·  track drives the seed color token. */
+var BASE = "https://michaellukasme-dot.github.io";
+var COURSES = [
+  {id:"jrny2017",  title:"Journeyman Electrician — NEC 2017", track:"Journeyman", color:"#F4A300", status:"live",     url:BASE+"/NEC2017_journeyman_course/"},
+  {id:"jrny2020",  title:"Journeyman — NEC 2020",             track:"Journeyman", color:"#F4A300", status:"live",     url:BASE+"/NEC2020_journeyman_course/"},
+  {id:"jrny2023",  title:"Journeyman — NEC 2023",             track:"Journeyman", color:"#F4A300", status:"live",     url:BASE+"/NEC2023_journeyman_course/"},
+  {id:"jrny2026",  title:"Journeyman — NEC 2026",             track:"Journeyman", color:"#F4A300", status:"live",     url:BASE+"/NEC2026_journeyman_course/"},
+  {id:"master2017",title:"Master Electrician — NEC 2017",     track:"Master",     color:"#7F77DD", status:"scaffold", url:"#"},
+  {id:"multimeter",title:"Mastering the Electric Multimeter", track:"Bonus quick-classes", color:"#1D9E75", status:"live",   bonus:true, url:BASE+"/multimeter/"},
+  {id:"estimating",title:"Residential Estimating",            track:"Bonus quick-classes", color:"#D85A30", status:"live",   bonus:true, url:BASE+"/amp-academy-estimating/"},
+  {id:"loadcalc",  title:"Load Calculator",                   track:"Tools",      color:"#1D9E75", status:"live",     url:BASE+"/nec-loadcalculator/"},
+  {id:"ecc",       title:"Electrical Code Coach",             track:"ECC",        color:"#378ADD", status:"live",     url:BASE+"/electrical-code-coach/"},
+  {id:"cockpit",   title:"Launch Cockpit — campaign",         track:"House tools",color:"#9db4cc", status:"live", internal:true, url:"#", note:"owner tool — runs on your machine"}
+];
+/* ---- PLANS (entitlement demo — what each kind of student is enrolled in) ---- */
+var PLANS = {
+  ibew:  {label:"IBEW Apprentice — full curriculum", ids:"*"},
+  perry: {label:"Perry student — Journeyman 2017 + bonus quick-classes", ids:["jrny2017","multimeter","estimating","loadcalc"]},
+  tools: {label:"Tools only (free)", ids:["multimeter","loadcalc"]},
+  owner: {label:"Owner — everything incl. house tools", ids:"**"}
+};
+function notInternal(c){return !c.internal;}
+
+function entitled(planKey){
+  var p = PLANS[planKey]; if(!p) return COURSES.filter(notInternal);
+  if(p.ids === "**") return COURSES;                          // owner: everything incl. house tools
+  if(p.ids === "*")  return COURSES.filter(notInternal);      // full student curriculum, no internal tools
+  return COURSES.filter(function(c){ return p.ids.indexOf(c.id) >= 0; }).filter(notInternal);
+}
+function card(c){
+  var statusPill = '<span class="pill '+c.status+'">'+c.status+'</span>'+
+    (c.bonus ? ' <span class="pill bonus">bonus</span>' : '');
+  var action;
+  if(c.status==="live" && c.url && c.url!=="#")      action = '<a class="btn" href="'+c.url+'" target="_blank" rel="noopener">Open →</a>';
+  else if(c.status==="coming")                        action = '<span class="btn ghost">Coming soon</span>';
+  else if(c.status==="scaffold")                      action = '<span class="btn ghost">In authoring</span>';
+  else                                                action = '<span class="btn ghost">—</span>';
+  var vnote = c.note ? '<small>('+c.note+')</small>' : '';
+  return '<div class="card"><div class="stripe" style="background:'+c.color+'"></div>'+
+    '<div class="body"><div class="track">'+c.track+'</div><h3>'+c.title+'</h3>'+
+    '<div class="meta">'+statusPill+' '+vnote+'</div></div>'+
+    '<div class="foot">'+action+'</div></div>';
+}
+function render(){
+  var planKey = document.getElementById("plan").value;
+  var list = entitled(planKey);
+  // group by track
+  var tracks = {}; list.forEach(function(c){ (tracks[c.track]=tracks[c.track]||[]).push(c); });
+  var html = "";
+  Object.keys(tracks).forEach(function(tr){
+    html += '<div class="section-h">'+tr+'</div><div class="grid">'+ tracks[tr].map(card).join("") +'</div>';
+  });
+  document.getElementById("shelf").innerHTML = html;
+  var live = list.filter(function(c){return c.status==="live";}).length;
+  document.getElementById("count").innerHTML = '<b>'+list.length+'</b> enrolled · '+live+' available now';
+  document.getElementById("note").innerHTML = PLANS[planKey].label +
+    ' — this shelf shows only what you are enrolled in. Other courses are hidden honestly, not faked.';
+  // Badging API — the icon "knows how many" (graceful no-op where unsupported)
+  try { if(navigator.setAppBadge) navigator.setAppBadge(live); } catch(e){}
+}
+
+// build plan selector
+(function(){
+  var sel = document.getElementById("plan");
+  Object.keys(PLANS).forEach(function(k){ var o=document.createElement("option"); o.value=k; o.textContent=PLANS[k].label; sel.appendChild(o); });
+  render();
+})();
+
+// PWA
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
+(function(){var d=null;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();d=e;var b=document.getElementById('aa-install');if(!b){b=document.createElement('button');b.id='aa-install';b.textContent='Install Campus';b.style.cssText='position:fixed;right:14px;bottom:14px;z-index:300;background:#F4A300;color:#0D1B2A;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer';document.body.appendChild(b);}b.style.display='block';b.onclick=function(){b.style.display='none';if(d){d.prompt();d=null;}};});})();
+</script>
+</body></html>
