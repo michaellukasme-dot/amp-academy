@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <!-- Amp Academy — Campus (the hub) · MVP v0.1 · 2026-06-19 · implements AA_IDENTITY_AND_CONTAINER_ARCHITECTURE_v1 -->
-<html lang="en"><head>
+<html lang="en" data-theme="light"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Amp Academy — Campus</title>
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0D1B2A">
 <link rel="apple-touch-icon" href="icons/icon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0D1B2A;--navy2:#11263b;--amber:#F4A300;--ink:#e8eef5;--muted:#9db4cc;--line:#1b3a57;--paper:#0a141f}
+:root{--head:'Syne',sans-serif;--body:'Inter',sans-serif;--mono:'Space Mono',ui-monospace,monospace}
+[data-theme="light"]{--paper:#F6F8FC;--navy2:#FFFFFF;--navy:#241606;--ink:#16202E;--muted:#5A6472;--line:#D8E0EC;--amber:#F2A93B;--note-bg:#F2A93B1f;--note-tx:#16202E}
+[data-theme="dark"]{--paper:#0E1422;--navy2:#161E2E;--navy:#0E1422;--ink:#EAEEF6;--muted:#9AA4B6;--line:#2A3550;--amber:#F2A93B;--note-bg:#1E2740;--note-tx:#EAEEF6}
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink)}
+body{margin:0;font-family:var(--body);background:var(--paper);color:var(--ink);transition:background .2s,color .2s}
 .wrap{max-width:1000px;margin:0 auto;padding:22px 20px 90px}
 .top{display:flex;align-items:center;gap:12px;margin-bottom:6px}
 .logo{width:44px;height:44px;border-radius:11px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px}
-.top h1{font-size:20px;margin:0;font-weight:800}
-.top .sub{font-size:12px;color:var(--muted);font-family:ui-monospace,monospace}
+.top h1{font-size:20px;margin:0;font-weight:800;font-family:var(--head)}
+.top .sub{font-size:12px;color:var(--muted);font-family:var(--mono)}
 .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:14px 0 8px}
 .plan{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
-.plan select{background:var(--navy2);color:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;font-family:inherit}
+.plan select{background:var(--navy2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;font-family:inherit}
 .count{font-size:13px;color:var(--muted)}
 .count b{color:var(--amber);font-size:15px}
-.note{background:#11263b;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:10px 14px;font-size:12.5px;line-height:1.5;color:#cfe0f0;margin:10px 0 18px}
+.note{background:var(--note-bg);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:10px 14px;font-size:12.5px;line-height:1.5;color:var(--note-tx);margin:10px 0 18px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
 .card{background:var(--navy2);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .card .stripe{height:6px}
 .card .body{padding:14px 15px;flex:1;display:flex;flex-direction:column;gap:8px}
-.card .track{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:ui-monospace,monospace}
-.card h3{font-size:15px;margin:0;line-height:1.25}
+.card .track{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:var(--mono)}
+.card h3{font-size:15px;margin:0;line-height:1.25;font-family:var(--head)}
 .card .meta{font-size:12px;color:var(--muted)}
 .card .foot{padding:0 15px 15px;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .pill{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
@@ -38,14 +41,16 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--muted);cursor:default}
 .btn.lock{background:transparent;border:1px solid #5a2d2d;color:#f09595;cursor:pointer}
 .foot small{color:var(--muted);font-size:11px}
-.section-h{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:22px 0 6px;font-family:ui-monospace,monospace}
-.foota{margin-top:26px;font-size:11px;color:#637a91;line-height:1.6}
+.section-h{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:22px 0 6px;font-family:var(--mono)}
+.foota{margin-top:26px;font-size:11px;color:var(--muted);line-height:1.6}
+.toggle{font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer}
 </style></head>
 <body>
 <div class="wrap">
   <div class="top">
     <div class="logo">&#9889;</div>
     <div><h1>Amp Academy</h1><div class="sub">Campus · your courses, one home</div></div>
+    <button class="toggle" id="tg" style="margin-left:auto" onclick="tgTheme()"><span id="tgi">&#9728;</span> <span id="tgt">Light</span></button>
   </div>
 
   <div class="bar">
@@ -139,5 +144,7 @@ function render(){
 // PWA
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
 (function(){var d=null;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();d=e;var b=document.getElementById('aa-install');if(!b){b=document.createElement('button');b.id='aa-install';b.textContent='Install Campus';b.style.cssText='position:fixed;right:14px;bottom:14px;z-index:300;background:#F4A300;color:#0D1B2A;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer';document.body.appendChild(b);}b.style.display='block';b.onclick=function(){b.style.display='none';if(d){d.prompt();d=null;}};});})();
+function tgTheme(){var h=document.documentElement;var d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.getElementById('tgi').innerHTML=d?'&#9728;':'&#9789;';document.getElementById('tgt').textContent=d?'Light':'Dark';try{localStorage.setItem('aa.theme',d?'light':'dark');}catch(e){}}
+(function(){try{var t=localStorage.getItem('aa.theme');if(t){document.documentElement.setAttribute('data-theme',t);var d=t==='dark';var i=document.getElementById('tgi'),x=document.getElementById('tgt');if(i)i.innerHTML=d?'&#9789;':'&#9728;';if(x)x.textContent=d?'Dark':'Light';}}catch(e){}})();
 </script>
 </body></html>
