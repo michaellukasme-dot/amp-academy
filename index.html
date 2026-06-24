@@ -50,7 +50,8 @@ body{margin:0;font-family:var(--body);background:var(--paper);color:var(--ink);t
   <div class="top">
     <div class="logo">&#9889;</div>
     <div><h1>Amp Academy</h1><div class="sub">Campus · your courses, one home</div></div>
-    <a class="toggle" href="guides.html" style="margin-left:auto;text-decoration:none">&#128214; Guides</a>
+    <a class="toggle" href="store/" style="margin-left:auto;text-decoration:none">&#128722; Store</a>
+    <a class="toggle" href="guides.html" style="text-decoration:none">&#128214; Guides</a>
     <button class="toggle" id="tg" onclick="tgTheme()"><span id="tgi">&#9728;</span> <span id="tgt">Light</span></button>
   </div>
 
@@ -65,7 +66,7 @@ body{margin:0;font-family:var(--body);background:var(--paper);color:var(--ink);t
   <div id="shelf"></div>
 
   <div class="foota">
-    Campus MVP v0.1 — enrollment is a <strong>local demo manifest</strong> (the IBEW-roster / Perry-subscription
+    Campus MVP v0.1 — enrollment is a <strong>local demo manifest</strong> (the IBEW-roster / Coach-subscription
     entitlement backend is gated, counsel-pending). Launch links open each course's own installable app.
     Track colors are a <strong>seed for Hanz &amp; Franz</strong> (the icon color-token system), not final.
     Per AA_IDENTITY_AND_CONTAINER_ARCHITECTURE_v1.
@@ -91,7 +92,7 @@ var COURSES = [
 /* ---- PLANS (entitlement demo — what each kind of student is enrolled in) ---- */
 var PLANS = {
   ibew:  {label:"IBEW Apprentice — full curriculum", ids:"*"},
-  perry: {label:"Perry student — Journeyman 2017 + bonus quick-classes", ids:["jrny2017","multimeter","estimating","loadcalc"]},
+  ecc:   {label:"ECC student — Journeyman 2017 + bonus quick-classes", ids:["jrny2017","multimeter","estimating","loadcalc"]},
   tools: {label:"Tools only (free)", ids:["multimeter","loadcalc"]},
   owner: {label:"Owner — everything incl. house tools", ids:"**"}
 };
